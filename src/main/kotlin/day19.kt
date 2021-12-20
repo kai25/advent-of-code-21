@@ -12,7 +12,7 @@ const val MIN_OVERLAPPING_BEACONS = 12
 class Point(val x: Int, val y: Int, val z: Int) {
     fun rotX(xRotDeg: Int): Point {
         val xRotRad = degToRad(xRotDeg.toDouble())
-        val x1 = 1 * x
+        val x1 = x
         val y1 = cos(xRotRad) * y - sin(xRotRad) * z
         val z1 = sin(xRotRad) * y + cos(xRotRad) * z
 
