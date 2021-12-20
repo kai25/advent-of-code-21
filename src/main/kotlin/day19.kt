@@ -6,11 +6,10 @@ fun degToRad(x: Double): Double {
     return x * PI / 180.0
 }
 
-class Point(val x: Int, val y: Int, val z: Int) {
-    override fun toString(): String {
-        return "Point(x=${x}, y=${y}, z=${z})"
-    }
+const val MIN_OVERLAPPING_BEACONS = 12
 
+
+class Point(val x: Int, val y: Int, val z: Int) {
     fun rotX(xRotDeg: Int): Point {
         val xRotRad = degToRad(xRotDeg.toDouble())
         val x1 = 1 * x
@@ -56,6 +55,10 @@ class Point(val x: Int, val y: Int, val z: Int) {
 
     override fun equals(other: Any?): Boolean {
         return other.toString() == this.toString()
+    }
+
+    override fun toString(): String {
+        return "Point(x=${x}, y=${y}, z=${z})"
     }
 }
 
@@ -148,7 +151,7 @@ fun compareScanners(nextScanner: BScanner, pivotVectors: Map<Int, Pair<Point, Po
                     overlappingPoints.add(pivotVectors[vectorHash]!!.first)
                     overlappingPoints.add(pivotVectors[vectorHash]!!.second)
                 }
-                if (overlappingPoints.size >= 12) {
+                if (overlappingPoints.size >= MIN_OVERLAPPING_BEACONS) {
                     val matchedHash = keyIntersect.first()
 
                     val pivotVector = pivotVectors[matchedHash]!!
